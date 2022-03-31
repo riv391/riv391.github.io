@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+	<body style="font-size: 200%; color: blue;">
+
+		<script>
+
+			if(('ondevicemotion' in window) || window.DeviceMotionEvent) {
+				
+
+				window.addEventListener('devicemotion', function(e) {
+
+					document.body.innerHTML += '<b>Acceleration</b>' +
+
+						'<br>acceleration.x=' + e.acceleration.x +
+
+						'<br>acceleration.y=' + e.acceleration.y +
+
+						'<br>acceleration.z=' + e.acceleration.z +
+
+						'<br>accelerationIncludingGravity.x=' + e.accelerationIncludingGravity.x +
+
+						'<br>accelerationIncludingGravity.y=' + e.accelerationIncludingGravity.y +
+
+						'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
+
+						'<br>rotationRate.alpha=' + e.rotationRate.alpha +
+
+						'<br>rotationRate.beta=' + e.rotationRate.beta +
+
+						'<br>rotationRate.gamma=' + e.rotationRate.gamma +
+
+						'<br>interval=' + e.interval;
+
+				});
+
+			}
+
+		</script>
+
+	</body>
+
+</html>
