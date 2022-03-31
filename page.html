@@ -4,6 +4,8 @@
 
 	<body style="font-size: 200%; color: blue;">
 
+		<img src="compass.jpg" id="imagine" style="transform:rotate(0deg);">
+		
 		<script>
 
 			if(('ondevicemotion' in window) || ('ondeviceorientation' in window) || window.DeviceOrientationEvent || window.DeviceMotionEvent) {
@@ -29,12 +31,8 @@
 				});*/
 				
 				window.addEventListener('deviceorientation', function(e) {
-					document.body.innerHTML = '<b>Acceleration</b>' +
-						'<br>rotationRate.alpha=' + parseInt(e.alpha) +
-
-						'<br>rotationRate.beta=' + parseInt(e.beta) +
-
-						'<br>rotationRate.gamma=' + parseInt(e.gamma);
+					var img = document.getElementById('imagine');
+						img.style.transform.rotate(parseInt(e.alpha));
 				}, true);
 			}
 
