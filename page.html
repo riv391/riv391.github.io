@@ -6,6 +6,8 @@
 
 		<img src="compass.jpg" id="imagine" style="transform:rotate(0deg);">
 		
+		<img src="compass.jpg" id="imagine2" style="transform:rotate(0deg);">
+		
 		<script>
 
 			if(('ondevicemotion' in window) || ('ondeviceorientation' in window) || window.DeviceOrientationEvent || window.DeviceMotionEvent) {
@@ -31,7 +33,11 @@
 				});*/
 				
 				window.addEventListener('deviceorientation', function(e) {
+					
 					var img = document.getElementById('imagine');
+						img.style.transform = "rotate(" + parseInt(e.alpha) + "deg)";
+					
+					var img2 = document.getElementById('imagine2');
 						img.style.transform = "rotate(" + parseInt(e.alpha) + "deg)";
 				}, true);
 			}
