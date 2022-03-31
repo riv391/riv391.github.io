@@ -32,7 +32,7 @@
 				
 				window.addEventListener('deviceorientation', function(e) {
 					var img = document.getElementById('imagine');
-						img.style.transform.rotate(parseInt(e.alpha));
+						img.style.transform = "rotate(" + parseInt(e.alpha) + "deg)";
 				}, true);
 			}
 
