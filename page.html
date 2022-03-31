@@ -8,10 +8,9 @@
 
 			if(('ondevicemotion' in window) || window.DeviceMotionEvent) {
 				
-
 				window.addEventListener('devicemotion', function(e) {
 
-					document.body.innerHTML += '<b>Acceleration</b>' +
+					document.body.innerHTML = '<b>Acceleration</b>' +
 
 						'<br>acceleration.x=' + e.acceleration.x +
 
