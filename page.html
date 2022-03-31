@@ -30,11 +30,11 @@
 				
 				window.addEventListener('deviceorientation', function(e) {
 					document.body.innerHTML = '<b>Acceleration</b>' +
-						'<br>rotationRate.alpha=' + e.alpha +
+						'<br>rotationRate.alpha=' + parseInt(e.alpha) +
 
-						'<br>rotationRate.beta=' + e.beta +
+						'<br>rotationRate.beta=' + parseInt(e.beta) +
 
-						'<br>rotationRate.gamma=' + e.gamma;
+						'<br>rotationRate.gamma=' + parseInt(e.gamma);
 				}, true);
 			}
 
