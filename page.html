@@ -6,9 +6,9 @@
 
 		<script>
 
-			if(('ondevicemotion' in window) || window.DeviceMotionEvent) {
+			if(('ondevicemotion' in window) || ('ondeviceorientation' in window) || window.DeviceMotionEvent) {
 				
-				window.addEventListener('devicemotion', function(e) {
+				/*window.addEventListener('devicemotion', function(e) {
 
 					document.body.innerHTML = '<b>Acceleration</b>' +
 
@@ -24,16 +24,18 @@
 
 						'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
 
-						'<br>rotationRate.alpha=' + e.rotationRate.alpha +
-
-						'<br>rotationRate.beta=' + e.rotationRate.beta +
-
-						'<br>rotationRate.gamma=' + e.rotationRate.gamma +
-
 						'<br>interval=' + e.interval;
 
-				});
+				});*/
+				
+				window.addEventListener('deviceorientation', function(e) {
+					document.body.innerHTML += '<b>Acceleration</b>' +
+						'<br>rotationRate.alpha=' + e.alpha +
 
+						'<br>rotationRate.beta=' + e.beta +
+
+						'<br>rotationRate.gamma=' + e.gamma;
+				}
 			}
 
 		</script>
