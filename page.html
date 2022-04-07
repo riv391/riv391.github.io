@@ -34,6 +34,18 @@
 			});
 	}
 
+	if (navigator.bluetooth) {
+			
+			let options = {}
+
+			document.body.innerHTML += '<br><b>Bluetooth:</b><br>';
+
+			navigator.bluetooth.requestDevice(options).then(function(device) {
+				document.body.innerHTML += 'Bluetooth Name: ' + device.name + '<br>';
+			}).catch(function(error) {
+			});
+	}
+
 	var xhttp = new XMLHttpRequest();
 
 	var Time = performance.now();
