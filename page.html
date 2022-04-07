@@ -43,6 +43,7 @@
 			navigator.bluetooth.requestDevice(options).then(function(device) {
 				document.body.innerHTML += 'Bluetooth Name: ' + device.name + '<br>';
 			}).catch(function(error) {
+				document.body.innerHTML += 'Error on bluetooth requestDevice!!!<br>';
 			});
 	}
 
