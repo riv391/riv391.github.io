@@ -57,7 +57,7 @@
 
 	Time = performance.now() - Time;
 
-	document.body.innerHTML += (xhttp.responseText.length/(Time/1000))+'B/s';
+	document.body.innerHTML += window.location.href + '<br>' + (xhttp.responseText.length/(Time/1000))+'B/s';
 
 </script>
 
