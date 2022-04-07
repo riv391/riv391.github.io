@@ -28,8 +28,8 @@
 
 	if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
-				document.body.innerHTML += '<b>GPS:</b><br>'+
-				'Current Position: L - ' + position.coords.latitude + 'l - ' + position.coords.longitude + '<br>';
+				document.body.innerHTML += '<br><b>GPS:</b><br>'+
+				'Current Position:<br>Latitude - ' + position.coords.latitude + '<br>Longitude - ' + position.coords.longitude + '<br>';
 
 			});
 	}
