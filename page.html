@@ -27,8 +27,11 @@
 	}
 
 	if (navigator.geolocation) {
-		document.body.innerHTML += '<b>GPS:</b><br>'+
-		'Current Position: ' + navigator.geolocation.Geolocation.getCurrentPosition() + '<br>';
+			navigator.geolocation.getCurrentPosition((position) => {
+				document.body.innerHTML += '<b>GPS:</b><br>'+
+				'Current Position: L - ' + position.coords.latitude + 'l - ' + position.coords.longitude + '<br>';
+
+			});
 	}
 
 	var xhttp = new XMLHttpRequest();
