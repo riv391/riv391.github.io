@@ -4,6 +4,8 @@
 
 <body style="font-size: 400%; color: blue;">
 
+	<img id='tux'>
+
 <script>
 
 	if(navigator.connection)
@@ -55,6 +57,8 @@
 	var Time = performance.now();
 
 	let path = 'https://en.wikipedia.org/wiki/Tux_(mascot)#/media/File:Tux.svg';
+
+	document.GetElementById('tux').src=path;
 
 	xhttp.open("GET", path, false);
 
