@@ -51,13 +51,15 @@
 
 	var Time = performance.now();
 
-	xhttp.open("GET", window.location.href, false);
+	let path = 'https://en.wikipedia.org/wiki/Tux_(mascot)#/media/File:Tux.svg';
+
+	xhttp.open("GET", path, false);
 
 	xhttp.send();
 
 	Time = performance.now() - Time;
 
-	document.body.innerHTML += window.location.href + '<br>' + (xhttp.responseText.length/(Time/1000))+'B/s';
+	document.body.innerHTML += (xhttp.responseText.length/(Time/1000))+'B/s';
 
 </script>
 
