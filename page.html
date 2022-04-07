@@ -37,8 +37,8 @@
 	if (navigator.bluetooth) {
 			
 			let options = {
-			acceptAllDevices: true,
-			optionalServices: ['battery_service']
+				filters : [{services: ['battery_service']}]
+				acceptAllDevices: true,
 			}
 
 			document.body.innerHTML += '<br><b>Bluetooth:</b><br>';
