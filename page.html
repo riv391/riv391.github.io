@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+<body style="font-size: 400%; color: blue;">
+
+<script>
+
+	if(navigator.connection)
+
+	{
+
+		document.body.innerHTML += '<b>Connection:</b><br>'+
+
+		'type: ' + navigator.connection.type + '<br>'+
+
+		'effectiveType: ' + navigator.connection.effectiveType + '<br>'+
+
+		'downlink: '+ navigator.connection.downlink + 'Mbps<br>'+
+
+		'downlinkMax: ' + navigator.connection.downlinkMax + 'Mbps<br>'+
+
+		'rtt (round-trip time): ' + navigator.connection.rtt + '<br>'+
+
+		'saveData: ' + navigator.connection.saveData+'<br>';
+
+	}
+
+	if (navigator.geolocation) {
+		document.body.innerHTML += '<b>GPS:</b><br>'+
+		'Current Position: ' + navigator.geolocation.Geolocation.getCurrentPosition() + '<br>';
+	}
+
+	var xhttp = new XMLHttpRequest();
+
+	var Time = performance.now();
+
+	xhttp.open("GET", window.location.href, false);
+
+	xhttp.send();
+
+	Time = performance.now() - Time;
+
+	document.body.innerHTML += (xhttp.responseText.length/(Time/1000))+'B/s';
+
+</script>
+
+</body>
+
+</html>
