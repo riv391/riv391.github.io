@@ -29,7 +29,7 @@
 			}
 
 			function Distance(T1, T2) {
-				val distance = 0;
+				let distance = 0;
 				if (!T1) return distance;
 				if (!T2) return distance;
 				distance = Math.sqrt(Math.abs(Math.floor(T2.clientX) - Math.floor(T1.clientX)) + Math.abs(Math.floor(T2.clientY) - Math.floor(T1.clientY)));
