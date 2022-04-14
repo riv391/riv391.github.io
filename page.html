@@ -14,7 +14,7 @@
 
 		<script>
 
-			var oldTouches, LastTouchGesture='';
+			var oldTouches, LastTouchGesture='', LastRotateGesture='';
 
 			function Touches(T)
 			{
@@ -41,15 +41,16 @@
 
 				var e=event||window.event, S;
 
-				e.preventDefault(); e.stopImmediatePropagation();
+				e.preventDefault();
+				e.stopImmediatePropagation();
 
 				S = e.type+'<br>';
 
-				//if(e.touches)S+='touches:'+Touches(e.touches)+'<br>';
+				if(e.touches)S+='touches:'+Touches(e.touches)+'<br>';
 
-				//if(e.targetTouches)S+='targetTouches:'+Touches(e.targetTouches)+'<br>';
+				if(e.targetTouches)S+='targetTouches:'+Touches(e.targetTouches)+'<br>';
 
-				//if(e.changedTouches)S+='changedTouches:'+Touches(e.changedTouches)+'<br>';
+				if(e.changedTouches)S+='changedTouches:'+Touches(e.changedTouches)+'<br>';
 
 				if(e.touches.length >= 2)
 					S+='Distance: ' + Distance(e.touches[0], e.touches[1]) + '<br>';
@@ -84,9 +85,9 @@
 
 				{
 
-					if(d>0)LastTouchGesture = 'Rotate Right';
+					if(d>0)LastRotateGesture = 'Rotate Right';
 
-					else LastTouchGesture = 'Rotate Left';
+					else LastRotateGesture = 'Rotate Left';
 
 				}
 
@@ -97,7 +98,7 @@
 
 				oldTouches=e.touches;
 
-				document.body.innerHTML = S+LastTouchGesture;
+				document.body.innerHTML = S+LastTouchGesture + '<br>' + LastRotateGesture;
 
 			}
 
