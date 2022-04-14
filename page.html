@@ -78,13 +78,16 @@
 				}
 
 				if(e.type=='touchmove' && e.touches.length==2 && oldTouches.length==2 && 
-				Math.abs(Distance(oldTouches[0], e.touches[0])) < 2 && 
+				(Math.abs(Distance(oldTouches[0], e.touches[0])) < 2 && 
 				Math.abs(Distance(oldTouches[1], e.touches[1])) > 2 &&
-				Math.abs(Distance(oldTouches[0], oldTouches[1]) - Distance(e.touches[0], e.touches[1])) < 2)
+				Math.abs(Distance(oldTouches[0], oldTouches[1]) - Distance(e.touches[0], e.touches[1])) < 2) ||
+				(Math.abs(Distance(oldTouches[1], e.touches[1])) < 2 && 
+				Math.abs(Distance(oldTouches[0], e.touches[0])) > 2 &&
+				Math.abs(Distance(oldTouches[0], oldTouches[1]) - Distance(e.touches[0], e.touches[1])) < 2) )
 
 				{
 
-					if(Math.floor(e.touches[1].clientX) - Math.floor(oldTouches[1].clientX)>0)LastRotateGesture = 'Rotate Right';
+					if(Math.floor(e.touches[1].clientX) - Math.floor(oldTouches[1].clientX) > 0)LastRotateGesture = 'Rotate Right';
 
 					else LastRotateGesture = 'Rotate Left';
 
