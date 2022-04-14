@@ -8,13 +8,13 @@
 
 		<style>
 
-		html, body {width:50%; height:50%;}
+		html, body {width:100%; height:100%;}
 
 		</style>
 
 		<script>
 
-			var oldTouches, LastTouchGesture='';
+			var oldTouches, LastTouchGesture='', LastRotateGesture='';
 
 			function Touches(T)
 			{
@@ -41,7 +41,8 @@
 
 				var e=event||window.event, S;
 
-				e.preventDefault(); e.stopImmediatePropagation();
+				e.preventDefault();
+				e.stopImmediatePropagation();
 
 				S = e.type+'<br>';
 
@@ -59,14 +60,14 @@
 				//..
 
 				if(e.type=='touchmove' && e.touches.length==2 && oldTouches.length==2 &&
+				Math.abs(d = (Distance(e.touches[0], e.touches[1]) - Distance(oldTouches[0], oldTouches[1]))) > 2)
+				//Math.abs(d=Math.hypot(e.touches[0].pageX - e.touches[1].pageX,
 
-				Math.abs(d=Math.hypot(e.touches[0].pageX - e.touches[1].pageX,
+				//e.touches[0].pageY - e.touches[1].pageY) -
 
-				e.touches[0].pageY - e.touches[1].pageY) -
+				//Math.hypot(oldTouches[0].pageX - oldTouches[1].pageX,
 
-				Math.hypot(oldTouches[0].pageX - oldTouches[1].pageX,
-
-				oldTouches[0].pageY - oldTouches[1].pageY))>2)
+				//oldTouches[0].pageY - oldTouches[1].pageY))>2)
 
 				{
 
@@ -76,13 +77,27 @@
 
 				}
 
-			//..
+				//if(e.type=='touchmove' && e.touches.length==2 && oldTouches.length==2 && 
+				//Math.abs(Distance(oldTouches[0], e.touches[0])) < 2 && 
+				//Math.abs(d = Distance(oldTouches[1], e.touches[1])) > 2 &&
+				//Math.abs(Distance(oldTouches[0], oldTouches[1]) - Distance(e.touches[0], e.touches[1])) < 2)
+
+				//{
+
+				//	if(d>0)LastRotateGesture = 'Rotate Right';
+
+				//	else LastRotateGesture = 'Rotate Left';
+
+				//}
+
+
+				//..
 
 
 
 				oldTouches=e.touches;
 
-				document.body.innerHTML = S+LastTouchGesture;
+				document.body.innerHTML = S+LastTouchGesture + '<br>' + LastRotateGesture;
 
 			}
 
