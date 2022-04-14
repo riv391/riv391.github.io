@@ -32,7 +32,7 @@
 				val distance = 0;
 				if (!T1) return distance;
 				if (!T2) return distance;
-				distance = Math.sqrt(Math.abs(T2.clientX - T1.clientX) + Math.abs(T2.clientY - T1.clientY));
+				distance = Math.sqrt(Math.abs(Math.floor(T2.clientX) - Math.floor(T1.clientX)) + Math.abs(Math.floor(T2.clientY) - Math.floor(T1.clientY)));
 				return distance;
 			}
 
@@ -51,8 +51,8 @@
 
 				if(e.changedTouches)S+='changedTouches:'+Touches(e.changedTouches)+'<br>';
 
-				if (e.touches.length >= 2)
-					S+='Distance: ' + Distance(e.touches[0], e.touches[1]);
+				if(e.touches.length >= 2)
+					S+='Distance: ' + Distance(e.touches[0], e.touches[1]) + '<br>';
 
 				//Identificare Gest
 
