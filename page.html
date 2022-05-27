@@ -38,11 +38,14 @@
 				return distance;
 			}
 
+			function StartTouch() {
+				
+				touchTime = (new Data()).getTime();
+				TouchEvent();
+			}
+
 			function TouchEvent ()
 			{
-
-				touchTime = (new Data()).getTime();
-
 				var e=event||window.event, S;
 
 				e.preventDefault();
@@ -118,9 +121,9 @@
 
 		</head>
 
-		<body style="font-size: 200%; color: blue;" ontouchstart="TouchEvent()"
+		<body style="font-size: 200%; color: blue;" ontouchstart="StartTouch()"
 
-		ontouchend="TouchEvent()" ontouchmove="TouchEvent()"
+		ontouchend="TouchRelease()" ontouchmove="TouchEvent()"
 
 		ontouchcancel="TouchEvent()">
 
