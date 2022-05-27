@@ -125,15 +125,21 @@
 					document.body.innerHTML += 'Tap action';
 			}
 
+			function config() {
+				let body = document.body;
+				body.addEventListener('touchstart', StartTouch);
+				body.addEventListener('touchend', TouchRelease);
+				body.addEventListener('touchmove', TouchEvent);
+				body.addEventListener('touchcancel', TouchEvent);
+			}
+
+			config();
+
 		</script>
 
 		</head>
 
-		<body style="font-size: 200%; color: blue;" ontouchstart="StartTouch()"
-
-		ontouchend="TouchRelease()" ontouchmove="TouchEvent()"
-
-		ontouchcancel="TouchEvent()">
+		<body style="font-size: 200%; color: blue;">
 
 	</body>
 
