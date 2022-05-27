@@ -52,7 +52,7 @@
 
 				if (e.touches.length == 0) {
 					releaseTime = _date.getTime() - touchTime;
-					if (releaseTime > 1000)
+					if (releaseTime > 10)
 						actionType = 'hold';
 					else
 						actionType = 'tap';
