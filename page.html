@@ -16,6 +16,8 @@
 
 			var oldTouches, LastTouchGesture='';
 
+			var _date = new Date();
+
 			var releaseTime, touchTime = 0;
 
 			var actionType = '';
@@ -48,14 +50,14 @@
 				e.preventDefault();
 				e.stopImmediatePropagation();
 
-				if (e.touces.length == 0) {
-					releaseTime = (new Date()).getTime() - touchTime;
+				if (e.touches.length == 0) {
+					releaseTime = _date.getTime() - touchTime;
 					if (releaseTime > 1000)
 						actionType = 'hold';
 					else
-						actionType = 'tap';	
+						actionType = 'tap';
 				} else
-					touchTime = (new Date()).getTime();
+					touchTime = _date.getTime();
 
 				S = e.type+'<br>';
 
