@@ -16,6 +16,8 @@
 
 			var oldTouches, LastTouchGesture='';
 
+			var touchTime, releaseTime;
+
 			function Touches(T)
 			{
 				var S='';
@@ -38,6 +40,8 @@
 
 			function TouchEvent ()
 			{
+
+				touchTime = (new Data()).getTime();
 
 				var e=event||window.event, S;
 
@@ -100,6 +104,14 @@
 
 				document.body.innerHTML = S+LastTouchGesture;
 
+			}
+
+			function TouchRelease() {
+				releaseTime = (new Data()).getTime();
+				if (releaseTime - touchTime > 1000)
+					document.body.innerHTML += 'Hold action';
+				else
+					document.body.innerHTML += 'Tap action';
 			}
 
 		</script>
