@@ -41,7 +41,12 @@
 			function StartTouch() {
 				
 				touchTime = (new Data()).getTime();
-				TouchEvent();
+
+				var e=event||window.event, S;
+
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				ManageEvent(e, S);
 			}
 
 			function TouchEvent ()
@@ -50,7 +55,11 @@
 
 				e.preventDefault();
 				e.stopImmediatePropagation();
+				
+				ManageEvent(e, S);
+			}
 
+			function ManageEvent(e, S) {
 				S = e.type+'<br>';
 
 				if(e.touches)S+='touches:'+Touches(e.touches)+'<br>';
@@ -106,7 +115,6 @@
 				oldTouches=e.touches;
 
 				document.body.innerHTML = S+LastTouchGesture;
-
 			}
 
 			function TouchRelease() {
