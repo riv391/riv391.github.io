@@ -16,7 +16,9 @@
 
 			var oldTouches, LastTouchGesture='';
 
-			var touchTime, releaseTime;
+			var releaseTime, touchTime = 0;
+
+			var actionType = '';
 
 			function Touches(T)
 			{
@@ -38,26 +40,22 @@
 				return distance;
 			}
 
-			function StartTouch(e) {
-				
-				touchTime = (new Data()).getTime();
-
-				e.preventDefault();
-				e.stopImmediatePropagation();
-				
-				ManageEvent(e);
-			}
-
-			function TouchEvent (e)
+			function TouchEvent ()
 			{
+
+				var e=event||window.event, S;
+
 				e.preventDefault();
 				e.stopImmediatePropagation();
-				
-				ManageEvent(e);
-			}
 
-			function ManageEvent(e) {
-				var S;
+				if (e.touces.length == 0) {
+					releaseTime = (new Date()).getTime() - touchTime;
+					if (releaseTime > 1000)
+						actionType = 'hold';
+					else
+						actionType = 'tap';	
+				} else
+					touchTime = (new Date()).getTime();
 
 				S = e.type+'<br>';
 
@@ -69,6 +67,9 @@
 
 				if(e.touches.length >= 2)
 					S+='Distance: ' + Distance(e.touches[0], e.touches[1]) + '<br>';
+
+				if (actionType != '')
+					S+='Last action: ' + actionType + '<br>';
 
 				//Identificare Gest
 
@@ -84,6 +85,7 @@
 								LastTouchGesture = 'Rotate Right';
 							else 
 								LastTouchGesture = 'Rotate Left';
+							actionType = '';
 						}
 						if((Math.abs(Distance(oldTouches[1], e.touches[1])) < 2 && 
 						Math.abs(Distance(oldTouches[0], e.touches[0])) > 2)) {
@@ -92,7 +94,7 @@
 
 							else 
 								LastTouchGesture = 'Rotate Left';
-
+							actionType = '';
 						}
 
 					} else {
@@ -102,6 +104,7 @@
 								LastTouchGesture = 'Zoom';
 							else 
 								LastTouchGesture = 'Pinch';
+							actionType = '';
 						}
 
 					}
@@ -114,31 +117,18 @@
 				oldTouches=e.touches;
 
 				document.body.innerHTML = S+LastTouchGesture;
-			}
 
-			function TouchRelease(e) {
-				releaseTime = (new Data()).getTime();
-				if (releaseTime - touchTime > 1000)
-					document.body.innerHTML += 'Hold action';
-				else
-					document.body.innerHTML += 'Tap action';
 			}
-
-			function config() {
-				let bodyTemp = document.body;
-				bodyTemp.addEventListener('touchstart', StartTouch);
-				bodyTemp.addEventListener('touchend', TouchRelease);
-				bodyTemp.addEventListener('touchmove', TouchEvent);
-				bodyTemp.addEventListener('touchcancel', TouchEvent);
-			}
-
-			config();
 
 		</script>
 
 		</head>
 
-		<body style="font-size: 200%; color: blue;">
+		<body style="font-size: 200%; color: blue;" ontouchstart="TouchEvent()"
+
+		ontouchend="TouchEvent()" ontouchmove="TouchEvent()"
+
+		ontouchcancel="TouchEvent()">
 
 	</body>
 
