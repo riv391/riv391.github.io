@@ -38,28 +38,27 @@
 				return distance;
 			}
 
-			function StartTouch() {
+			function StartTouch(e) {
 				
 				touchTime = (new Data()).getTime();
 
-				var e=event||window.event, S;
-
-				e.preventDefault();
-				e.stopImmediatePropagation();
-				ManageEvent(e, S);
-			}
-
-			function TouchEvent ()
-			{
-				var e=event||window.event, S;
-
 				e.preventDefault();
 				e.stopImmediatePropagation();
 				
-				ManageEvent(e, S);
+				ManageEvent(e);
 			}
 
-			function ManageEvent(e, S) {
+			function TouchEvent (e)
+			{
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				
+				ManageEvent(e);
+			}
+
+			function ManageEvent(e) {
+				var S;
+
 				S = e.type+'<br>';
 
 				if(e.touches)S+='touches:'+Touches(e.touches)+'<br>';
@@ -117,7 +116,7 @@
 				document.body.innerHTML = S+LastTouchGesture;
 			}
 
-			function TouchRelease() {
+			function TouchRelease(e) {
 				releaseTime = (new Data()).getTime();
 				if (releaseTime - touchTime > 1000)
 					document.body.innerHTML += 'Hold action';
@@ -126,11 +125,11 @@
 			}
 
 			function config() {
-				let body = document.body;
-				body.addEventListener('touchstart', StartTouch);
-				body.addEventListener('touchend', TouchRelease);
-				body.addEventListener('touchmove', TouchEvent);
-				body.addEventListener('touchcancel', TouchEvent);
+				let bodyTemp = document.body;
+				bodyTemp.addEventListener('touchstart', StartTouch);
+				bodyTemp.addEventListener('touchend', TouchRelease);
+				bodyTemp.addEventListener('touchmove', TouchEvent);
+				bodyTemp.addEventListener('touchcancel', TouchEvent);
 			}
 
 			config();
