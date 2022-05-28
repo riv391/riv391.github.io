@@ -14,38 +14,37 @@
 
 			if(('ondevicemotion' in window) || window.DeviceMotionEvent) {
 				
-
 				window.addEventListener('devicemotion', function(e) {
 
-					imagine = document.getElementById("imagine");
+					//imagine = document.getElementById("imagine");
 
-					imagine.style='transform:rotate(' + e.rotationRate.alpha + 'deg)';
+					//imagine.style='transform:rotate(' + e.rotationRate.alpha + 'deg)';
 
-					document.getElementById("info").innerHTML = '<p>Rotation alpha: ' + e.rotationRate.alpha + '</p>' + 
-									'<p>Rotation beta: ' + e.rotationRate.beta + '</p>' + 
-									'<p>Rotation gamma: ' + e.rotationRate.gamma + '</p>';
+					//document.getElementById("info").innerHTML = '<p>Rotation alpha: ' + e.rotationRate.alpha + '</p>' + 
+					//				'<p>Rotation beta: ' + e.rotationRate.beta + '</p>' + 
+					//				'<p>Rotation gamma: ' + e.rotationRate.gamma + '</p>';
 
-					//document.body.innerHTML += '<b>Acceleration</b>' +
+					document.body.innerHTML += '<b>Acceleration</b>' +
 
-					//	'<br>acceleration.x=' + e.acceleration.x +
+						'<br>acceleration.x=' + e.acceleration.x +
 
-					//	'<br>acceleration.y=' + e.acceleration.y +
+						'<br>acceleration.y=' + e.acceleration.y +
 
-					//	'<br>acceleration.z=' + e.acceleration.z +
+						'<br>acceleration.z=' + e.acceleration.z +
 
-					//	'<br>accelerationIncludingGravity.x=' + e.accelerationIncludingGravity.x +
+						'<br>accelerationIncludingGravity.x=' + e.accelerationIncludingGravity.x +
 
-					//	'<br>accelerationIncludingGravity.y=' + e.accelerationIncludingGravity.y +
+						'<br>accelerationIncludingGravity.y=' + e.accelerationIncludingGravity.y +
 
-					//	'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
+						'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
 
-					//	'<br>rotationRate.alpha=' + e.rotationRate.alpha +
+						'<br>rotationRate.alpha=' + e.rotationRate.alpha +
 
-					//	'<br>rotationRate.beta=' + e.rotationRate.beta +
+						'<br>rotationRate.beta=' + e.rotationRate.beta +
 
-					//	'<br>rotationRate.gamma=' + e.rotationRate.gamma +
+						'<br>rotationRate.gamma=' + e.rotationRate.gamma +
 
-					//	'<br>interval=' + e.interval;
+						'<br>interval=' + e.interval;
 
 				});
 			}
