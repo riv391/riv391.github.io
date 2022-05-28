@@ -6,6 +6,8 @@
 
 		<img id="imagine" src="compass.jpg">
 
+		<div id="info"></div>
+
 		<script>
 
 			if(('ondevicemotion' in window) || window.DeviceMotionEvent) {
@@ -16,6 +18,10 @@
 					imagine = document.getElementById("imagine");
 
 					imagine.style='transform:rotate(' + e.rotationRate.alpha + 'deg)';
+
+					document.getElementById("info").innerHTML = '<p>Rotation alpha: ' + e.rotationRate.alpha + '</p><br>' + 
+									'<p>Rotation beta: ' + e.rotationRate.beta + '</p><br>' + 
+									'<p>Rotation gamma: ' + e.rotationRate.gamma + '</p><br>';
 
 					//document.body.innerHTML += '<b>Acceleration</b>' +
 
