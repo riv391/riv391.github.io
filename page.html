@@ -59,26 +59,23 @@
 				if(e.touches.length >= 2)
 					S+='Distance: ' + Distance(e.touches[0], e.touches[1]) + '<br>';
 
-				S+='releaseTime: ' + releaseTime + '<br>';
-
 				//Identificare Gest
 
 				//..
 
+				if (e.type == 'touchend' && e.touches.length == 0) {
+					releaseTime = _date.now() - touchTime;
+					if (releaseTime > 0.00000000000001)
+						LastTouchGesture = 'hold';
+					else
+						LastTouchGesture = 'tap';
+				}
+
+				if (e.type == 'touchstart' && e.touches.length == 1)
+					touchTime = _date.now();
+
 				if(e.type=='touchmove')
 				{
-					if (e.touches.length == 0) {
-						releaseTime = _date.now() - touchTime;
-						if (releaseTime > 0.00000000000001)
-							LastTouchGesture = 'hold';
-						else
-							LastTouchGesture = 'tap';
-
-					}
-
-					if (e.touches.length == 1)
-						touchTime = _date.now();
-
 					if (e.touches.length==2 && oldTouches.length==2) {
 						if (Math.abs(Distance(oldTouches[0], oldTouches[1]) - Distance(e.touches[0], e.touches[1])) < 2) {
 							if ((Math.abs(Distance(oldTouches[0], e.touches[0])) < 2 && 
