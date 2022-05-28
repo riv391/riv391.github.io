@@ -2,63 +2,74 @@
 
 <html>
 
-	<body style="font-size: 200%; color: blue;">
+<body style="font-size: 400%; color: blue;">
 
-		<img id="imagine" src="compass.jpg">
+	<!--<img id='tux'>-->
 
-		<br>
+<script>
 
-		<img id="imagine_3d" src="compass.jpg">
+	if(navigator.connection)
 
-		<br>
+	{
 
-		<div id="info"></div>
+		document.body.innerHTML += '<b>Connection:</b><br>'+
 
-		<script>
+		'type: ' + navigator.connection.type + '<br>'+
 
-			if(('ondevicemotion' in window) || window.DeviceMotionEvent) {
-				
-				window.addEventListener('devicemotion', function(e) {
+		'effectiveType: ' + navigator.connection.effectiveType + '<br>'+
 
-					imagine = document.getElementById("imagine");
+		'downlink: '+ navigator.connection.downlink + 'Mbps<br>'+
 
-					imagine_3d = document.getElementById("imagine_3d");
+		'downlinkMax: ' + navigator.connection.downlinkMax + 'Mbps<br>'+
 
-					imagine.style='transform:rotate(' + e.rotationRate.alpha + 'deg);';
+		'rtt (round-trip time): ' + navigator.connection.rtt + '<br>'+
 
-					imagine_3d.style='transform:rotateZ(' + e.rotationRate.alpha + 'deg);transform:rotateY(' + e.rotationRate.gamma + 'deg);transform:rotateX(' + e.rotationRate.beta + 'deg);';
+		'saveData: ' + navigator.connection.saveData+'<br>';
 
-					document.getElementById("info").innerHTML = '<p>Rotation alpha: ' + e.rotationRate.alpha + '</p>' + 
-									'<p>Rotation beta: ' + e.rotationRate.beta + '</p>' + 
-									'<p>Rotation gamma: ' + e.rotationRate.gamma + '</p>';
+	}
 
-					//document.body.innerHTML = '<b>Acceleration</b>' +
+	if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				document.body.innerHTML += '<br><b>GPS:</b><br>'+
+				'Current Position:<br>Latitude - ' + position.coords.latitude + '<br>Longitude - ' + position.coords.longitude + '<br>';
 
-					//	'<br>acceleration.x=' + e.acceleration.x +
+			});
+	}
 
-					//	'<br>acceleration.y=' + e.acceleration.y +
-
-					//	'<br>acceleration.z=' + e.acceleration.z +
-
-					//	'<br>accelerationIncludingGravity.x=' + e.accelerationIncludingGravity.x +
-
-					//	'<br>accelerationIncludingGravity.y=' + e.accelerationIncludingGravity.y +
-
-					//	'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
-
-					//	'<br>rotationRate.alpha=' + e.rotationRate.alpha +
-
-					//	'<br>rotationRate.beta=' + e.rotationRate.beta +
-
-					//	'<br>rotationRate.gamma=' + e.rotationRate.gamma +
-
-					//	'<br>interval=' + e.interval;
-
-				});
+	if (navigator.bluetooth) {
+			
+			let options = {
+				filters : [{services: ['battery_service']}]
+				acceptAllDevices: true,
 			}
 
-		</script>
+			document.body.innerHTML += '<br><b>Bluetooth:</b><br>';
 
-	</body>
+			navigator.bluetooth.requestDevice(options).then(function(device) {
+				document.body.innerHTML += 'Bluetooth Name: ' + device.name + '<br>';
+			}).catch(function(error) {
+				document.body.innerHTML += 'Error on bluetooth requestDevice!!!<br>';
+			});
+	}
+
+	var xhttp = new XMLHttpRequest();
+
+	var Time = performance.now();
+
+	let path = 'https://en.wikipedia.org/wiki/Tux_(mascot)#/media/File:Tux.svg';
+
+	//document.GetElementById('tux').src=path;
+
+	xhttp.open("GET", path, false);
+
+	xhttp.send();
+
+	Time = performance.now() - Time;
+
+	document.body.innerHTML += (xhttp.responseText.length/(Time/1000))+'B/s';
+
+</script>
+
+</body>
 
 </html>
