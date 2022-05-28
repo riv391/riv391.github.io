@@ -20,8 +20,6 @@
 
 			var releaseTime, touchTime = 0;
 
-			var actionType = '';
-
 			function Touches(T)
 			{
 				var S='';
@@ -63,9 +61,6 @@
 
 				S+='releaseTime: ' + releaseTime + '<br>';
 
-				if (actionType != '')
-					S+='Last action: ' + actionType + '<br>';
-
 				//Identificare Gest
 
 				//..
@@ -75,9 +70,9 @@
 					if (e.touches.length == 0) {
 						releaseTime = _date.now() - touchTime;
 						if (releaseTime > 0.00000000000001)
-							actionType = 'hold';
+							LastTouchGesture = 'hold';
 						else
-							actionType = 'tap';
+							LastTouchGesture = 'tap';
 
 					}
 
@@ -93,7 +88,6 @@
 									LastTouchGesture = 'Rotate Right';
 								else 
 									LastTouchGesture = 'Rotate Left';
-								actionType = '';
 							}
 							if((Math.abs(Distance(oldTouches[1], e.touches[1])) < 2 && 
 							Math.abs(Distance(oldTouches[0], e.touches[0])) > 2)) {
@@ -102,7 +96,6 @@
 
 								else 
 									LastTouchGesture = 'Rotate Left';
-								actionType = '';
 							}
 
 						} else {
@@ -112,7 +105,6 @@
 									LastTouchGesture = 'Zoom';
 								else 
 									LastTouchGesture = 'Pinch';
-								actionType = '';
 							}
 						}
 					}
