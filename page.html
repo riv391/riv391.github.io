@@ -2,74 +2,76 @@
 
 <html>
 
-<body style="font-size: 400%; color: blue;">
+	<body style="font-size: 400%; color: blue;">
+		
+		<img id='tux'>
 
-	<!--<img id='tux'>-->
+		<br>
 
-<script>
+		<script>
 
-	if(navigator.connection)
+			if(navigator.connection)
 
-	{
+			{
 
-		document.body.innerHTML += '<b>Connection:</b><br>'+
+				document.body.innerHTML += '<b>Connection:</b><br>'+
 
-		'type: ' + navigator.connection.type + '<br>'+
+				'type: ' + navigator.connection.type + '<br>'+
 
-		'effectiveType: ' + navigator.connection.effectiveType + '<br>'+
+				'effectiveType: ' + navigator.connection.effectiveType + '<br>'+
 
-		'downlink: '+ navigator.connection.downlink + 'Mbps<br>'+
+				'downlink: '+ navigator.connection.downlink + 'Mbps<br>'+
 
-		'downlinkMax: ' + navigator.connection.downlinkMax + 'Mbps<br>'+
+				'downlinkMax: ' + navigator.connection.downlinkMax + 'Mbps<br>'+
 
-		'rtt (round-trip time): ' + navigator.connection.rtt + '<br>'+
+				'rtt (round-trip time): ' + navigator.connection.rtt + '<br>'+
 
-		'saveData: ' + navigator.connection.saveData+'<br>';
+				'saveData: ' + navigator.connection.saveData+'<br>';
 
-	}
-
-	if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition((position) => {
-				document.body.innerHTML += '<br><b>GPS:</b><br>'+
-				'Current Position:<br>Latitude - ' + position.coords.latitude + '<br>Longitude - ' + position.coords.longitude + '<br>';
-
-			});
-	}
-
-	if (navigator.bluetooth) {
-			
-			let options = {
-				filters : [{services: ['battery_service']}]
-				acceptAllDevices: true,
 			}
 
-			document.body.innerHTML += '<br><b>Bluetooth:</b><br>';
+			if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition((position) => {
+						document.body.innerHTML += '<br><b>GPS:</b><br>'+
+						'Current Position:<br>Latitude - ' + position.coords.latitude + '<br>Longitude - ' + position.coords.longitude + '<br>';
 
-			navigator.bluetooth.requestDevice(options).then(function(device) {
-				document.body.innerHTML += 'Bluetooth Name: ' + device.name + '<br>';
-			}).catch(function(error) {
-				document.body.innerHTML += 'Error on bluetooth requestDevice!!!<br>';
-			});
-	}
+					});
+			}
 
-	var xhttp = new XMLHttpRequest();
+			if (navigator.bluetooth) {
+					
+					let options = {
+						filters : [{services: ['battery_service']}],
+						acceptAllDevices: true,
+					};
 
-	var Time = performance.now();
+					document.body.innerHTML += '<br><b>Bluetooth:</b><br>';
 
-	let path = 'https://en.wikipedia.org/wiki/Tux_(mascot)#/media/File:Tux.svg';
+					navigator.bluetooth.requestDevice(options).then(function(device) {
+						document.body.innerHTML += 'Bluetooth Name: ' + device.name + '<br>';
+					}).catch(function(error) {
+						document.body.innerHTML += 'Error on bluetooth requestDevice!!!<br>';
+					});
+			}
 
-	//document.GetElementById('tux').src=path;
+			var xhttp = new XMLHttpRequest();
 
-	xhttp.open("GET", path, false);
+			var Time = performance.now();
 
-	xhttp.send();
+			let path = 'https://upload.wikimedia.org/wikipedia/commons/6/66/TUX_G2.svg';
 
-	Time = performance.now() - Time;
+			document.getElementById('tux').src=path;
 
-	document.body.innerHTML += (xhttp.responseText.length/(Time/1000))+'B/s';
+			xhttp.open("GET", path, false);
 
-</script>
+			xhttp.send();
 
-</body>
+			Time = performance.now() - Time;
+
+			document.body.innerHTML += (xhttp.responseText.length/(Time/1000))+'B/s';
+
+		</script>
+
+	</body>
 
 </html>
