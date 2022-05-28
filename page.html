@@ -4,6 +4,8 @@
 
 	<body style="font-size: 200%; color: blue;">
 
+		<img id="imagine" src="compass.jpg">
+
 		<script>
 
 			if(('ondevicemotion' in window) || window.DeviceMotionEvent) {
@@ -11,27 +13,31 @@
 
 				window.addEventListener('devicemotion', function(e) {
 
-					document.body.innerHTML += '<b>Acceleration</b>' +
+					imagine = document.getElementById("imagine");
 
-						'<br>acceleration.x=' + e.acceleration.x +
+					imagine.style='transform:rotate(' + e.rotationRate.alpha + 'deg)';
 
-						'<br>acceleration.y=' + e.acceleration.y +
+					//document.body.innerHTML += '<b>Acceleration</b>' +
 
-						'<br>acceleration.z=' + e.acceleration.z +
+					//	'<br>acceleration.x=' + e.acceleration.x +
 
-						'<br>accelerationIncludingGravity.x=' + e.accelerationIncludingGravity.x +
+					//	'<br>acceleration.y=' + e.acceleration.y +
 
-						'<br>accelerationIncludingGravity.y=' + e.accelerationIncludingGravity.y +
+					//	'<br>acceleration.z=' + e.acceleration.z +
 
-						'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
+					//	'<br>accelerationIncludingGravity.x=' + e.accelerationIncludingGravity.x +
 
-						'<br>rotationRate.alpha=' + e.rotationRate.alpha +
+					//	'<br>accelerationIncludingGravity.y=' + e.accelerationIncludingGravity.y +
 
-						'<br>rotationRate.beta=' + e.rotationRate.beta +
+					//	'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
 
-						'<br>rotationRate.gamma=' + e.rotationRate.gamma +
+					//	'<br>rotationRate.alpha=' + e.rotationRate.alpha +
 
-						'<br>interval=' + e.interval;
+					//	'<br>rotationRate.beta=' + e.rotationRate.beta +
+
+					//	'<br>rotationRate.gamma=' + e.rotationRate.gamma +
+
+					//	'<br>interval=' + e.interval;
 
 				});
 
