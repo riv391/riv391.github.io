@@ -4,11 +4,15 @@
 
 	<body style="font-size: 200%; color: blue;">
 
-		<!--<img id="imagine" src="compass.jpg">
+		<img id="imagine" src="compass.jpg">
 
 		<br>
 
-		<div id="info"></div>-->
+		<img id="imagine_3d" src="compass.jpg">
+
+		<br>
+
+		<div id="info"></div>
 
 		<script>
 
@@ -16,35 +20,39 @@
 				
 				window.addEventListener('devicemotion', function(e) {
 
-					//imagine = document.getElementById("imagine");
+					imagine = document.getElementById("imagine");
 
-					//imagine.style='transform:rotate(' + e.rotationRate.alpha + 'deg)';
+					imagine_3d = document.getElementById("imagine_3d");
 
-					//document.getElementById("info").innerHTML = '<p>Rotation alpha: ' + e.rotationRate.alpha + '</p>' + 
-					//				'<p>Rotation beta: ' + e.rotationRate.beta + '</p>' + 
-					//				'<p>Rotation gamma: ' + e.rotationRate.gamma + '</p>';
+					imagine.style='transform:rotate(' + e.rotationRate.alpha + 'deg);';
 
-					document.body.innerHTML = '<b>Acceleration</b>' +
+					imagine_3d.style='transform:rotateZ(' + e.rotationRate.alpha + 'deg);transform:rotateY(' + e.rotationRate.gamma + 'deg);transform:rotateX(' + e.rotationRate.beta + 'deg);';
 
-						'<br>acceleration.x=' + e.acceleration.x +
+					document.getElementById("info").innerHTML = '<p>Rotation alpha: ' + e.rotationRate.alpha + '</p>' + 
+									'<p>Rotation beta: ' + e.rotationRate.beta + '</p>' + 
+									'<p>Rotation gamma: ' + e.rotationRate.gamma + '</p>';
 
-						'<br>acceleration.y=' + e.acceleration.y +
+					//document.body.innerHTML = '<b>Acceleration</b>' +
 
-						'<br>acceleration.z=' + e.acceleration.z +
+					//	'<br>acceleration.x=' + e.acceleration.x +
 
-						'<br>accelerationIncludingGravity.x=' + e.accelerationIncludingGravity.x +
+					//	'<br>acceleration.y=' + e.acceleration.y +
 
-						'<br>accelerationIncludingGravity.y=' + e.accelerationIncludingGravity.y +
+					//	'<br>acceleration.z=' + e.acceleration.z +
 
-						'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
+					//	'<br>accelerationIncludingGravity.x=' + e.accelerationIncludingGravity.x +
 
-						'<br>rotationRate.alpha=' + e.rotationRate.alpha +
+					//	'<br>accelerationIncludingGravity.y=' + e.accelerationIncludingGravity.y +
 
-						'<br>rotationRate.beta=' + e.rotationRate.beta +
+					//	'<br>accelerationIncludingGravity.z=' + e.accelerationIncludingGravity.z +
 
-						'<br>rotationRate.gamma=' + e.rotationRate.gamma +
+					//	'<br>rotationRate.alpha=' + e.rotationRate.alpha +
 
-						'<br>interval=' + e.interval;
+					//	'<br>rotationRate.beta=' + e.rotationRate.beta +
+
+					//	'<br>rotationRate.gamma=' + e.rotationRate.gamma +
+
+					//	'<br>interval=' + e.interval;
 
 				});
 			}
