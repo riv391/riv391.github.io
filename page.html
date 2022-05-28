@@ -2,75 +2,140 @@
 
 <html>
 
-	<body style="font-size: 400%; color: blue;">
-		
-		<img id='tux'>
+	<head>
 
-		<br>
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+		<style>
+
+		html, body {width:100%; height:100%;}
+
+		</style>
 
 		<script>
 
-			if(navigator.connection)
+			var oldTouches, LastTouchGesture='';
 
+			var _date = new Date();
+
+			var releaseTime, touchTime = 0;
+
+			var actionType = '';
+
+			function Touches(T)
+			{
+				var S='';
+
+				for(var i=0;i<T.length;i++)
+
+				S+=' X'+i+'='+Math.floor(T[i].clientX)+' Y'+i+'='+ Math.floor(T[i].clientY);
+
+				return S;
+
+			}
+
+			function Distance(T1, T2) {
+				let distance = 0;
+				if (!T1) return distance;
+				if (!T2) return distance;
+				distance = Math.sqrt(Math.abs(Math.floor(T2.clientX) - Math.floor(T1.clientX)) + Math.abs(Math.floor(T2.clientY) - Math.floor(T1.clientY)));
+				return distance;
+			}
+
+			function TouchEvent ()
 			{
 
-				document.body.innerHTML += '<b>Connection:</b><br>'+
+				var e=event||window.event, S;
 
-				'type: ' + navigator.connection.type + '<br>'+
+				e.preventDefault();
+				e.stopImmediatePropagation();
 
-				'effectiveType: ' + navigator.connection.effectiveType + '<br>'+
+				S = e.type+'<br>';
 
-				'downlink: '+ navigator.connection.downlink + 'Mbps<br>'+
+				if(e.touches)S+='touches:'+Touches(e.touches)+'<br>';
 
-				'downlinkMax: ' + navigator.connection.downlinkMax + 'Mbps<br>'+
+				if(e.targetTouches)S+='targetTouches:'+Touches(e.targetTouches)+'<br>';
 
-				'rtt (round-trip time): ' + navigator.connection.rtt + '<br>'+
+				if(e.changedTouches)S+='changedTouches:'+Touches(e.changedTouches)+'<br>';
 
-				'saveData: ' + navigator.connection.saveData+'<br>';
+				if(e.touches.length >= 2)
+					S+='Distance: ' + Distance(e.touches[0], e.touches[1]) + '<br>';
+
+				S+='releaseTime: ' + releaseTime + '<br>';
+
+				if (actionType != '')
+					S+='Last action: ' + actionType + '<br>';
+
+				//Identificare Gest
+
+				//..
+
+				if(e.type=='touchmove')
+				{
+					if (e.touches.length == 0) {
+						releaseTime = _date.now() - touchTime;
+						if (releaseTime > 0.00000000000001)
+							actionType = 'hold';
+						else
+							actionType = 'tap';
+
+					}
+
+					if (e.touches.length == 1)
+						touchTime = _date.now();
+
+					if (e.touches.length==2 && oldTouches.length==2) {
+						if (Math.abs(Distance(oldTouches[0], oldTouches[1]) - Distance(e.touches[0], e.touches[1])) < 2) {
+							if ((Math.abs(Distance(oldTouches[0], e.touches[0])) < 2 && 
+							Math.abs(Distance(oldTouches[1], e.touches[1])) > 2))
+							{
+								if(Math.floor(e.touches[1].clientX) - Math.floor(oldTouches[1].clientX) > 0)
+									LastTouchGesture = 'Rotate Right';
+								else 
+									LastTouchGesture = 'Rotate Left';
+								actionType = '';
+							}
+							if((Math.abs(Distance(oldTouches[1], e.touches[1])) < 2 && 
+							Math.abs(Distance(oldTouches[0], e.touches[0])) > 2)) {
+								if(Math.floor(e.touches[0].clientX) - Math.floor(oldTouches[0].clientX) > 0)
+									LastTouchGesture = 'Rotate Right';
+
+								else 
+									LastTouchGesture = 'Rotate Left';
+								actionType = '';
+							}
+
+						} else {
+							if(Math.abs(d = (Distance(e.touches[0], e.touches[1]) - Distance(oldTouches[0], oldTouches[1]))) >= 2)
+							{
+								if(d>0)
+									LastTouchGesture = 'Zoom';
+								else 
+									LastTouchGesture = 'Pinch';
+								actionType = '';
+							}
+						}
+					}
+				}
+
+
+				//..
+
+				oldTouches=e.touches;
+
+				document.body.innerHTML = S+LastTouchGesture;
 
 			}
-
-			if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition((position) => {
-						document.body.innerHTML += '<br><b>GPS:</b><br>'+
-						'Current Position:<br>Latitude - ' + position.coords.latitude + '<br>Longitude - ' + position.coords.longitude + '<br>';
-
-					});
-			}
-
-			if (navigator.bluetooth) {
-					
-					let options = {
-						filters : [{services: ['battery_service']}],
-						acceptAllDevices: true,
-					};
-
-					document.body.innerHTML += '<br><b>Bluetooth:</b><br>';
-
-					navigator.bluetooth.requestDevice(options).then(function(device) {
-						document.body.innerHTML += 'Bluetooth Name: ' + device.name + '<br>';
-					}).catch(function(error) {
-						document.body.innerHTML += 'Error on bluetooth requestDevice!!!<br>';
-					});
-			}
-
-			var xhttp = new XMLHttpRequest();
-
-			var Time = performance.now();
-
-			let path = 'https://upload.wikimedia.org/wikipedia/commons/6/66/TUX_G2.svg';
-
-			document.getElementById('tux').src=path;
-
-			xhttp.open("GET", path, false);
-
-			xhttp.send();
-
-			Time = performance.now() - Time;
-
-			document.body.innerHTML += (xhttp.responseText.length/(Time/1000))+'B/s';
 
 		</script>
+
+		</head>
+
+		<body style="font-size: 200%; color: blue;" ontouchstart="TouchEvent()"
+
+		ontouchend="TouchEvent()" ontouchmove="TouchEvent()"
+
+		ontouchcancel="TouchEvent()">
 
 	</body>
 
